@@ -5,6 +5,9 @@
 
 #define N 100000
 #define hilos 16
+#define mostrar 10
+
+void imprimirArreglo(float *d);
 
 int main(){
     float a[N], b[N], c[N];
@@ -18,8 +21,7 @@ int main(){
     }
 
 
-    using clock = std::chrono::steady_clock;
-    auto start = clock::now();
+    auto start = std::chrono::steady_clock::now();
 
     //Hasta aquí la lógica es la misma que ejemplo secuencial
     omp_set_num_threads(hilos);
@@ -31,27 +33,29 @@ int main(){
     }
     
 
-    auto end = clock::now();
+    auto end = std::chrono::steady_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
 
-    std::cout << "Elapsed: " << time << " milliseconds\n";
+    std::cout << "Tiempo: " << time << " ms\n";
 
     std::cout << "a = ";
-    for (i = 0; i < 10; i++) {
-        std::cout << a[i] << " ";
-    }
+    imprimirArreglo(a);
     std::cout << "\n"; 
 
     std::cout << "b = ";
-    for (i = 0; i < 10; i++) {
-        std::cout << b[i] << " ";
-    }
-    std::cout << "\n"; 
+    imprimirArreglo(b);
+    std::cout << "\n";
+
     std::cout << "c = ";
-    for (i = 0; i < 10; i++) {
-        std::cout << c[i] << " ";
-    }
-    std::cout << "\n"; 
+    imprimirArreglo(c);
+    std::cout << "\n";
 
     return 0;
+}
+
+void imprimirArreglo(float *d)
+{
+    for (int x = 0; x < mostrar; x++ )
+        std::cout << d[x] << " ";
+    std::cout << std::endl;
 }
