@@ -18,21 +18,19 @@ int main(){
         b[i] = dist(rd);
     }
 
-    auto start = std::chrono::steady_clock::now();
-
     std::cout << "Sumando arreglos en secuencia!\n";
 
-    for (int repeat = 0; repeat < 10000; repeat++) {
-        for (i = 0; i < N; i++)
-        {
-            c[i] = a[i] + b[i];
-        }
+    auto start = std::chrono::steady_clock::now();
+    for (i=0; i<N; i++)
+    {
+        c[i] = a[i] + b[i];
     }
     
+    
     auto end = std::chrono::steady_clock::now();
-    auto time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
+    auto time = std::chrono::duration_cast<std::chrono::microseconds>(end-start).count();
 
-    std::cout << "Tiempo: " << time << " ms\n";
+    std::cout << "Tiempo: " << time << " microsegundos\n";
     
     std::cout << "a = ";
     imprimirArreglo(a);
